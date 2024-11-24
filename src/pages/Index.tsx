@@ -15,7 +15,7 @@ const Index = () => {
         <div className="flex flex-col items-center justify-center">
           <div className="animate-float mb-8">
             <img 
-              src="/troll-mascot.png" 
+              src="troll-mascot.png" 
               alt="TrollCoin Mascot" 
               className="w-32 h-32 object-contain"
             />
@@ -29,7 +29,7 @@ const Index = () => {
           <p className="text-xl mb-8">The most ridiculous cryptocurrency you'll ever not need!</p>
           <Button 
             onClick={handleBuyClick}
-            className="bg-white text-coin-primary hover:bg-gray-100 text-lg px-8 py-6 rounded-full font-bold"
+            className="bg-green-500 hover:bg-green-600 text-white text-lg px-8 py-6 rounded-full font-bold"
           >
             Join the Trolvolution!
           </Button>
