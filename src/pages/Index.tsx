@@ -23,7 +23,7 @@ const Index = () => {
           onClick={handleBuyClick}
           className="bg-white text-coin-primary hover:bg-gray-100 text-lg px-8 py-6 rounded-full font-bold"
         >
-          Buy $TRL Now (Not Financial Advice)
+          Buy $TRL Now (Please Don't)
         </Button>
       </div>
 
