@@ -13,15 +13,17 @@ const Index = () => {
       {/* Hero Section */}
       <div className="container pt-20 pb-10 text-white text-center">
         <div className="animate-float">
-          <Coins className="w-20 h-20 mx-auto mb-8 animate-spin-slow" />
+          <div className="rotate-180">
+            <Coins className="w-20 h-20 mx-auto mb-8 animate-spin-slow" />
+          </div>
         </div>
-        <h1 className="text-6xl font-bold mb-4">MemeCoins To The Moon! 🚀</h1>
+        <h1 className="text-6xl font-bold mb-4">TrollCoin ($TRL) 🚀</h1>
         <p className="text-xl mb-8">The most ridiculous cryptocurrency you'll ever not need!</p>
         <Button 
           onClick={handleBuyClick}
           className="bg-white text-coin-primary hover:bg-gray-100 text-lg px-8 py-6 rounded-full font-bold"
         >
-          Buy Now (Not Financial Advice)
+          Buy $TRL Now (Not Financial Advice)
         </Button>
       </div>
 
