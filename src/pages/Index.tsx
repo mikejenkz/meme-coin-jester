@@ -15,7 +15,7 @@ const Index = () => {
         <div className="flex flex-col items-center justify-center">
           <div className="animate-float mb-8">
             <img 
-              src="troll-mascot.png" 
+              src="IMG_7153.png" 
               alt="TrollCoin Mascot" 
               className="w-32 h-32 object-contain"
             />
