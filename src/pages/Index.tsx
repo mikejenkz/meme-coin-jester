@@ -11,7 +11,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-coin-primary to-coin-secondary">
       {/* Hero Section */}
-      <div className="container pt-12 pb-6 text-white text-center">
+      <div className="container pt-8 pb-6 text-white text-center">
         <div className="flex flex-col items-center justify-center">
           <div className="animate-float mb-4">
             <img 
@@ -20,7 +20,7 @@ const Index = () => {
               className="w-32 h-32 object-contain border-0"
             />
           </div>
-          <div className="relative w-32 h-32 mb-4">
+          <div className="relative w-32 h-32 mb-2">
             <img 
               src="Coin.png"
               alt="Spinning Coin 1"
@@ -56,7 +56,7 @@ const Index = () => {
             <br />
             Troll Coin
           </h1>
-          <p className="text-xl mb-4">The most ridiculous cryptocurrency you'll ever not need!</p>
+          <p className="text-xl mb-4">The first coin fueled by trolling every shit coin in the game!</p>
           <Button 
             onClick={handleBuyClick}
             className="bg-green-500 hover:bg-green-600 text-white text-lg px-8 py-6 rounded-full font-bold mb-2"
