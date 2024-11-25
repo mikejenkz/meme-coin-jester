@@ -64,7 +64,7 @@ const Index = () => {
             Join the Trolvolution!
           </Button>
           <div className="text-sm font-medium bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm">
-            0.001 $TROL = 1 BTC
+            0.001 TROL = 1 BTC
           </div>
         </div>
       </div>
