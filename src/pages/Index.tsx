@@ -17,7 +17,7 @@ const Index = () => {
             <img 
               src="IMG_7153-removebg-preview.png" 
               alt="TrollCoin Mascot" 
-              className="w-32 h-32 object-contain"
+              className="w-32 h-32 object-contain border-0"
             />
           </div>
           <div className="animate-float">
