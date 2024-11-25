@@ -18,8 +18,6 @@ const Index = () => {
               src="IMG_7153-removebg-preview.png" 
               alt="TrollCoin Mascot" 
               className="w-32 h-32 object-contain border-0"
-              loading="eager"
-              fetchPriority="high"
             />
           </div>
           <div className="relative w-32 h-32 mb-2">
@@ -27,7 +25,6 @@ const Index = () => {
               src="Coin.png"
               alt="Spinning Coin 1"
               className="absolute w-12 h-12 animate-spin-slow left-1/2 -ml-6"
-              loading="eager"
               style={{
                 animation: 'spin 4s linear infinite, orbit 4s linear infinite',
                 transformOrigin: '50% 150%'
@@ -37,7 +34,6 @@ const Index = () => {
               src="Coin.png"
               alt="Spinning Coin 2"
               className="absolute w-12 h-12 animate-spin-slow left-1/2 -ml-6"
-              loading="lazy"
               style={{
                 animation: 'spin 4s linear infinite, orbit 4s linear infinite',
                 transformOrigin: '50% 150%',
@@ -48,7 +44,6 @@ const Index = () => {
               src="Coin.png"
               alt="Spinning Coin 3"
               className="absolute w-12 h-12 animate-spin-slow left-1/2 -ml-6"
-              loading="lazy"
               style={{
                 animation: 'spin 4s linear infinite, orbit 4s linear infinite',
                 transformOrigin: '50% 150%',
