@@ -19,7 +19,7 @@ const Index = () => {
               alt="TrollCoin Mascot" 
               className="w-32 h-32 object-contain border-0"
               loading="eager"
-              fetchpriority="high"
+              fetchPriority="high"
             />
           </div>
           <div className="relative w-32 h-32 mb-2">
