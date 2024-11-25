@@ -15,7 +15,6 @@ const FallingCoins = () => {
           style={{
             left: `${(i * 2.5) % 100}%`,
             animation: `fall ${3 + (i % 5)}s linear infinite`,
-            animationDelay: `${i * 0.3}s`,
           }}
         />
       ))}
