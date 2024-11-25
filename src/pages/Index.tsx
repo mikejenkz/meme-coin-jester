@@ -6,14 +6,14 @@ import { toast } from "sonner";
 const FallingCoins = () => {
   return (
     <div className="absolute top-0 left-0 w-full h-48 overflow-hidden pointer-events-none">
-      {[...Array(20)].map((_, i) => (
+      {[...Array(40)].map((_, i) => (
         <img
           key={i}
           src="Coin.png"
           alt="Falling Coin"
           className="absolute w-8 h-8"
           style={{
-            left: `${(i * 5) % 100}%`,
+            left: `${(i * 2.5) % 100}%`,
             animation: `fall ${3 + (i % 5)}s linear infinite`,
             animationDelay: `${i * 0.3}s`,
           }}
@@ -31,7 +31,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-coin-primary to-coin-secondary">
       {/* Hero Section */}
-      <div className="container pt-8 pb-6 text-white text-center relative">
+      <div className="container pt-4 pb-6 text-white text-center relative">
         <FallingCoins />
         <div className="flex flex-col items-center justify-center">
           <div className="animate-float mb-4">
@@ -71,14 +71,32 @@ const Index = () => {
                 animationDelay: '2.6s'
               }}
             />
+            <img 
+              src="Coin.png"
+              alt="Spinning Coin 4"
+              className="absolute w-12 h-12 animate-spin-slow left-1/2 -ml-6"
+              style={{
+                animation: 'spin 4s linear infinite, orbit 4s linear infinite',
+                transformOrigin: '50% 150%',
+                animationDelay: '3.9s'
+              }}
+            />
+            <img 
+              src="Coin.png"
+              alt="Spinning Coin 5"
+              className="absolute w-12 h-12 animate-spin-slow left-1/2 -ml-6"
+              style={{
+                animation: 'spin 4s linear infinite, orbit 4s linear infinite',
+                transformOrigin: '50% 150%',
+                animationDelay: '5.2s'
+              }}
+            />
           </div>
-          <h1 className="text-6xl font-bold mb-2">
+          <h1 className="text-6xl font-bold mb-2 -mt-4">
             <span style={{ animation: 'colorChange 3s infinite' }}>$TROL</span>
             <br />
             TrolCoin
           </h1>
-          <p className="text-xl mb-4">The first coin fueled by trolling every shit coin in the game!</p>
-          
           <Button 
             onClick={handleBuyClick}
             className="bg-green-500 hover:bg-green-600 text-white text-lg px-8 py-6 rounded-full font-bold mb-2"
