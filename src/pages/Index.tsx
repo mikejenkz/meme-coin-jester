@@ -6,7 +6,7 @@ import { toast } from "sonner";
 const FallingCoins = () => {
   return (
     <div className="absolute top-0 left-0 w-full h-48 overflow-hidden pointer-events-none">
-      {[...Array(25)].map((_, i) => (
+      {[...Array(20)].map((_, i) => (
         <img
           key={i}
           src="Coin.png"
