@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Coins, Rocket, PiggyBank, PartyPopper } from "lucide-react";
+import { Rocket, PiggyBank, PartyPopper } from "lucide-react";
 import { toast } from "sonner";
 
 const Index = () => {
@@ -20,10 +20,26 @@ const Index = () => {
               className="w-32 h-32 object-contain border-0"
             />
           </div>
-          <div className="animate-float">
-            <div className="rotate-180">
-              <Coins className="w-20 h-20 mx-auto mb-8 animate-spin-slow" />
-            </div>
+          <div className="relative w-32 h-32">
+            <img 
+              src="Coin.png"
+              alt="Spinning Coin 1"
+              className="absolute w-12 h-12 animate-spin-slow"
+              style={{
+                animation: 'spin 4s linear infinite, orbit 4s linear infinite',
+                transformOrigin: '150% 150%'
+              }}
+            />
+            <img 
+              src="Coin.png"
+              alt="Spinning Coin 2"
+              className="absolute w-12 h-12 animate-spin-slow"
+              style={{
+                animation: 'spin 4s linear infinite, orbit 4s linear infinite',
+                transformOrigin: '150% 150%',
+                animationDelay: '2s'
+              }}
+            />
           </div>
           <h1 className="text-6xl font-bold mb-4">TrollCoin ($TRL) 🚀</h1>
           <p className="text-xl mb-8">The most ridiculous cryptocurrency you'll ever not need!</p>
