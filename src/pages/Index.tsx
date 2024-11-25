@@ -54,7 +54,7 @@ const Index = () => {
           <h1 className="text-6xl font-bold mb-2">
             <span style={{ animation: 'colorChange 3s infinite' }}>$TROL</span>
             <br />
-            Troll Coin
+            TrolCoin
           </h1>
           <p className="text-xl mb-4">The first coin fueled by trolling every shit coin in the game!</p>
           <Button 
