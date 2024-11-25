@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Rocket, PiggyBank, PartyPopper } from "lucide-react";
 import { toast } from "sonner";
+import { useState } from "react";
 
 const Index = () => {
   const handleBuyClick = () => {
@@ -90,28 +91,13 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Roadmap */}
+      {/* Top Memes */}
       <div className="container py-20 text-white">
-        <h2 className="text-4xl font-bold mb-12 text-center">Our "Serious" Roadmap</h2>
-        <div className="space-y-8">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">Q1</div>
-            <div className="flex-1 bg-white/10 p-4 rounded-lg">
-              Create more memes than any other crypto
-            </div>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">Q2</div>
-            <div className="flex-1 bg-white/10 p-4 rounded-lg">
-              Convince Elon Musk to tweet about us (maybe)
-            </div>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">Q3</div>
-            <div className="flex-1 bg-white/10 p-4 rounded-lg">
-              Launch NFTs of pixelated rockets
-            </div>
-          </div>
+        <h2 className="text-4xl font-bold mb-12 text-center">Top Memes</h2>
+        <div className="grid md:grid-cols-3 gap-8">
+          {Array(3).fill(null).map((_, index) => (
+            <MemeCard key={index} imageUrl="https://placehold.co/600x400" />
+          ))}
         </div>
       </div>
 
@@ -119,6 +105,51 @@ const Index = () => {
       <div className="container py-8 text-center text-white/60 text-sm">
         <p>This is not financial advice. Please don't actually buy this.</p>
         <p className="mt-2">Made with 💜 and terrible financial decisions</p>
+      </div>
+    </div>
+  );
+};
+
+const MemeCard = ({ imageUrl }: { imageUrl: string }) => {
+  const [isLiked, setIsLiked] = useState(false);
+  const [isDisliked, setIsDisliked] = useState(false);
+
+  const handleLike = () => {
+    setIsLiked(!isLiked);
+    if (isDisliked) setIsDisliked(false);
+    console.log('Meme liked:', !isLiked);
+  };
+
+  const handleDislike = () => {
+    setIsDisliked(!isDisliked);
+    if (isLiked) setIsLiked(false);
+    console.log('Meme disliked:', !isDisliked);
+  };
+
+  return (
+    <div className="relative bg-white/10 rounded-lg overflow-hidden">
+      <div className="aspect-video relative">
+        <img src={imageUrl} alt="Meme" className="w-full h-full object-cover" />
+        <div className="absolute bottom-4 right-4 flex gap-2">
+          <img
+            src="Coin.png"
+            alt="Like"
+            className={`w-8 h-8 cursor-pointer transition-colors ${
+              isLiked ? 'filter brightness-0 saturate-100 invert-[0.24] sepia-[.68] saturate-[.83] hue-rotate-[85deg]' : 'filter brightness-0 invert-[1]'
+            }`}
+            onClick={handleLike}
+          />
+          <Button
+            variant="ghost"
+            size="icon"
+            className={`w-8 h-8 rounded-full ${
+              isDisliked ? 'text-red-500' : 'text-white'
+            }`}
+            onClick={handleDislike}
+          >
+            👎
+          </Button>
+        </div>
       </div>
     </div>
   );
