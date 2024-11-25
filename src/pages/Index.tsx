@@ -91,23 +91,23 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Top Memes */}
-      <div className="container py-20 text-white">
-        <h2 className="text-4xl font-bold mb-12 text-center">Top Memes</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {Array(3).fill(null).map((_, index) => (
-            <MemeCard key={index} imageUrl="https://placehold.co/600x400" />
-          ))}
-        </div>
-      </div>
-
-      {/* Footer */}
-      <div className="container py-8 text-center text-white/60 text-sm">
-        <p>This is not financial advice. Please don't actually buy this.</p>
-        <p className="mt-2">Made with 💜 and terrible financial decisions</p>
-      </div>
+  {/* Top Trolls */}
+  <div className="container py-20 text-white">
+    <h2 className="text-4xl font-bold mb-12 text-center">Top Trolls</h2>
+    <div className="grid md:grid-cols-3 gap-8">
+      {Array(3).fill(null).map((_, index) => (
+        <MemeCard key={index} imageUrl="https://placehold.co/600x400" />
+      ))}
     </div>
-  );
+  </div>
+
+  {/* Footer */}
+  <div className="container py-8 text-center text-white/60 text-sm">
+    <p>This is not financial advice. Please don't actually buy this.</p>
+    <p className="mt-2">Made with 💜 and terrible financial decisions</p>
+  </div>
+</div>
+);
 };
 
 const MemeCard = ({ imageUrl }: { imageUrl: string }) => {
@@ -130,7 +130,7 @@ const MemeCard = ({ imageUrl }: { imageUrl: string }) => {
     <div className="relative bg-white/10 rounded-lg overflow-hidden">
       <div className="aspect-video relative">
         <img src={imageUrl} alt="Meme" className="w-full h-full object-cover" />
-        <div className="absolute bottom-4 right-4 flex gap-2">
+        <div className="absolute bottom-4 left-4 right-4 flex justify-between">
           <img
             src="Coin.png"
             alt="Like"
@@ -139,16 +139,14 @@ const MemeCard = ({ imageUrl }: { imageUrl: string }) => {
             }`}
             onClick={handleLike}
           />
-          <Button
-            variant="ghost"
-            size="icon"
-            className={`w-8 h-8 rounded-full ${
+          <span
+            className={`text-2xl cursor-pointer ${
               isDisliked ? 'text-red-500' : 'text-white'
             }`}
             onClick={handleDislike}
           >
             👎
-          </Button>
+          </span>
         </div>
       </div>
     </div>
