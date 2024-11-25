@@ -66,12 +66,12 @@
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
+@keyframes fall {
+  from {
+    transform: translateY(-100%);
   }
-  body {
-    @apply bg-background text-foreground;
+  to {
+    transform: translateY(300px);
   }
 }
 
@@ -103,4 +103,21 @@
   100% {
     color: #FFD700;
   }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
 }
