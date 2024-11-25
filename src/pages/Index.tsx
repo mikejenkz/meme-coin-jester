@@ -20,28 +20,42 @@ const Index = () => {
               className="w-32 h-32 object-contain border-0"
             />
           </div>
-          <div className="relative w-32 h-32">
+          <div className="relative w-32 h-32 mb-8">
             <img 
               src="Coin.png"
               alt="Spinning Coin 1"
-              className="absolute w-12 h-12 animate-spin-slow"
+              className="absolute w-12 h-12 animate-spin-slow left-1/2 -ml-6"
               style={{
                 animation: 'spin 4s linear infinite, orbit 4s linear infinite',
-                transformOrigin: '150% 150%'
+                transformOrigin: '50% 150%'
               }}
             />
             <img 
               src="Coin.png"
               alt="Spinning Coin 2"
-              className="absolute w-12 h-12 animate-spin-slow"
+              className="absolute w-12 h-12 animate-spin-slow left-1/2 -ml-6"
               style={{
                 animation: 'spin 4s linear infinite, orbit 4s linear infinite',
-                transformOrigin: '150% 150%',
-                animationDelay: '2s'
+                transformOrigin: '50% 150%',
+                animationDelay: '1.3s'
+              }}
+            />
+            <img 
+              src="Coin.png"
+              alt="Spinning Coin 3"
+              className="absolute w-12 h-12 animate-spin-slow left-1/2 -ml-6"
+              style={{
+                animation: 'spin 4s linear infinite, orbit 4s linear infinite',
+                transformOrigin: '50% 150%',
+                animationDelay: '2.6s'
               }}
             />
           </div>
-          <h1 className="text-6xl font-bold mb-4">TrollCoin ($TRL) 🚀</h1>
+          <h1 className="text-6xl font-bold mb-4">
+            <span style={{ animation: 'colorChange 3s infinite' }}>$TROL</span>
+            <br />
+            Troll Coin
+          </h1>
           <p className="text-xl mb-8">The most ridiculous cryptocurrency you'll ever not need!</p>
           <Button 
             onClick={handleBuyClick}

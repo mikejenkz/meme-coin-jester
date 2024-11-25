@@ -92,3 +92,15 @@
     transform: rotate(360deg);
   }
 }
+
+@keyframes colorChange {
+  0% {
+    color: #FFD700;
+  }
+  50% {
+    color: #22C55E;
+  }
+  100% {
+    color: #FFD700;
+  }
+}
