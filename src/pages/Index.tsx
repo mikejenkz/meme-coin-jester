@@ -14,8 +14,7 @@ const FallingCoins = () => {
           className="absolute w-8 h-8"
           style={{
             left: `${(i * 5) % 100}%`,
-            animation: `fall ${3 + (i % 5)}s linear infinite`,
-            animationDelay: `${i * 0.3}s`,
+            animation: `fall ${2 + Math.random() * 3}s linear infinite`,
           }}
         />
       ))}
