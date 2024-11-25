@@ -85,7 +85,7 @@ const Index = () => {
           <Card className="p-6 bg-white/90 backdrop-blur">
             <PartyPopper className="w-12 h-12 mb-4 text-coin-primary" />
             <h3 className="text-xl font-bold mb-2">Amazing Community</h3>
-            <p className="text-gray-600">We post memes 24/7</p>
+            <p className="text-gray-600">The only community that gets the joke</p>
           </Card>
         </div>
       </div>
