@@ -41,7 +41,7 @@ const Index = () => {
               className="w-32 h-32 object-contain border-0"
             />
           </div>
-          <h1 className="text-6xl font-bold -mt-4 mb-2">
+          <h1 className="text-6xl font-bold mt-8 mb-2">
             <span style={{ animation: 'colorChange 3s infinite' }}>$TROL</span>
             <br />
             TrolCoin
