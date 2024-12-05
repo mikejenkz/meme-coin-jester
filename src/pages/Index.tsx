@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const FallingCoins = () => {
   return (
@@ -29,6 +30,7 @@ const Index = () => {
   const [username, setUsername] = useState("");
   const [walletAddress, setWalletAddress] = useState("");
   const [submission, setSubmission] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleBuyClick = () => {
     toast("🎉 Just kidding! This is a meme coin after all!");
@@ -45,6 +47,10 @@ const Index = () => {
     setWalletAddress("");
     setSubmission("");
   };
+
+  if (isLoading) {
+    return <LoadingScreen onLoadComplete={() => setIsLoading(false)} />;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-coin-primary to-coin-secondary">
