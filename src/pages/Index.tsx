@@ -108,7 +108,7 @@ const Index = () => {
                   type="submit"
                   className="w-full bg-green-500 hover:bg-green-600 text-white"
                 >
-                  Submit Trol
+                  Earn TROL!
                 </Button>
               </div>
             </form>
