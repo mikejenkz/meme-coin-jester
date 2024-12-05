@@ -28,7 +28,6 @@ const FallingCoins = () => {
 const Index = () => {
   const [username, setUsername] = useState("");
   const [submission, setSubmission] = useState("");
-  const [photo, setPhoto] = useState<File | null>(null);
 
   const handleBuyClick = () => {
     toast("🎉 Just kidding! This is a meme coin after all!");
@@ -36,38 +35,13 @@ const Index = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!username.trim()) {
-      toast("Please enter your username!");
-      return;
-    }
-    if (!submission.trim() && !photo) {
-      toast("Please provide either a quote or a photo!");
+    if (!username.trim() || !submission.trim()) {
+      toast("Please fill in both username and your submission!");
       return;
     }
     toast("🎉 Your trol has been submitted for review!");
     setUsername("");
     setSubmission("");
-    setPhoto(null);
-    // Reset the file input by clearing its value
-    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
-    if (fileInput) fileInput.value = '';
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      if (file.size > 5 * 1024 * 1024) { // 5MB limit
-        toast("File size too large! Please upload an image under 5MB.");
-        e.target.value = '';
-        return;
-      }
-      if (!file.type.startsWith('image/')) {
-        toast("Please upload only image files!");
-        e.target.value = '';
-        return;
-      }
-      setPhoto(file);
-    }
   };
 
   return (
@@ -104,7 +78,7 @@ const Index = () => {
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-6">
             <h2 className="text-3xl font-bold mb-2">Earn $TROL</h2>
             <p className="text-lg mb-2">Memes fuel the Trolverse - get $TROL to troll!</p>
-            <p className="text-base mb-2 italic">Post your best $TROL memes with #Trol. The community will decide the winners, and $TROL rewards will be yours!</p>
+            <p className="text-base mb-2 italic">Post your best $TROL memes or links with #Trol. The community will decide the winners, and $TROL rewards will be yours!</p>
             <p className="text-sm font-semibold text-yellow-300">Best weekly trols 🏆</p>
             <div className="mt-4 bg-white/5 p-4 rounded-lg italic text-sm">
               <p className="text-gray-300">@soldmyhomeforTROL: "Buy coin in morning, sell at night." -Confucius</p>
@@ -124,20 +98,11 @@ const Index = () => {
                 </div>
                 <div>
                   <Textarea
-                    placeholder="Your quote or meme (optional if uploading an image)"
+                    placeholder="Your trol or link"
                     value={submission}
                     onChange={(e) => setSubmission(e.target.value)}
                     className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
                   />
-                </div>
-                <div className="space-y-2">
-                  <Input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                    className="bg-white/5 border-white/20 text-white file:bg-white/10 file:text-white file:border-0 file:rounded-md file:px-4 file:py-2 hover:file:bg-white/20"
-                  />
-                  <p className="text-xs text-gray-400">Max file size: 5MB. Supported formats: JPG, PNG, GIF</p>
                 </div>
                 <Button 
                   type="submit"
