@@ -2,6 +2,9 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Rocket, PiggyBank, PartyPopper } from "lucide-react";
 import { toast } from "sonner";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react";
 
 const FallingCoins = () => {
   return (
@@ -23,8 +26,22 @@ const FallingCoins = () => {
 };
 
 const Index = () => {
+  const [username, setUsername] = useState("");
+  const [submission, setSubmission] = useState("");
+
   const handleBuyClick = () => {
     toast("🎉 Just kidding! This is a meme coin after all!");
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!username.trim() || !submission.trim()) {
+      toast("Please fill in both username and your submission!");
+      return;
+    }
+    toast("🎉 Your trol has been submitted for review!");
+    setUsername("");
+    setSubmission("");
   };
 
   return (
@@ -66,6 +83,35 @@ const Index = () => {
             <div className="mt-4 bg-white/5 p-4 rounded-lg italic text-sm">
               <p className="text-gray-300">@soldmyhomeforTROL: "Buy coin in morning, sell at night." -Confucius</p>
             </div>
+
+            {/* New Submission Form */}
+            <form onSubmit={handleSubmit} className="mt-6 bg-white/5 p-4 rounded-lg">
+              <h3 className="text-lg font-semibold mb-4">Submit Your Trol</h3>
+              <div className="space-y-4">
+                <div>
+                  <Input
+                    placeholder="Your username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
+                  />
+                </div>
+                <div>
+                  <Textarea
+                    placeholder="Your quote or meme (text only for now)"
+                    value={submission}
+                    onChange={(e) => setSubmission(e.target.value)}
+                    className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
+                  />
+                </div>
+                <Button 
+                  type="submit"
+                  className="w-full bg-green-500 hover:bg-green-600 text-white"
+                >
+                  Submit Trol
+                </Button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
