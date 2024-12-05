@@ -72,9 +72,12 @@ const Index = () => {
           >
             Join the Trolvolution!
           </Button>
-          <div className="text-sm font-medium bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm mb-6">
-            0.001 TROL = 1 BTC
-          </div>
+          <Button 
+            onClick={handleBuyClick}
+            className="bg-yellow-500 hover:bg-yellow-600 text-white text-sm px-6 py-3 rounded-full font-semibold mb-6"
+          >
+            Add Liquidity
+          </Button>
 
           {/* Earn $TROL Section */}
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-6">
