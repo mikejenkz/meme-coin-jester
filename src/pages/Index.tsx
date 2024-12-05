@@ -106,7 +106,7 @@ const Index = () => {
               <div className="space-y-4">
                 <div>
                   <Input
-                    placeholder="Your username"
+                    placeholder="Username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
