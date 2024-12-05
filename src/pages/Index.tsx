@@ -28,6 +28,7 @@ const FallingCoins = () => {
 const Index = () => {
   const [username, setUsername] = useState("");
   const [submission, setSubmission] = useState("");
+  const [photo, setPhoto] = useState<File | null>(null);
 
   const handleBuyClick = () => {
     toast("🎉 Just kidding! This is a meme coin after all!");
@@ -35,13 +36,38 @@ const Index = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!username.trim() || !submission.trim()) {
-      toast("Please fill in both username and your submission!");
+    if (!username.trim()) {
+      toast("Please enter your username!");
+      return;
+    }
+    if (!submission.trim() && !photo) {
+      toast("Please provide either a quote or a photo!");
       return;
     }
     toast("🎉 Your trol has been submitted for review!");
     setUsername("");
     setSubmission("");
+    setPhoto(null);
+    // Reset the file input by clearing its value
+    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+    if (fileInput) fileInput.value = '';
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) { // 5MB limit
+        toast("File size too large! Please upload an image under 5MB.");
+        e.target.value = '';
+        return;
+      }
+      if (!file.type.startsWith('image/')) {
+        toast("Please upload only image files!");
+        e.target.value = '';
+        return;
+      }
+      setPhoto(file);
+    }
   };
 
   return (
@@ -84,7 +110,7 @@ const Index = () => {
               <p className="text-gray-300">@soldmyhomeforTROL: "Buy coin in morning, sell at night." -Confucius</p>
             </div>
 
-            {/* New Submission Form */}
+            {/* Submission Form */}
             <form onSubmit={handleSubmit} className="mt-6 bg-white/5 p-4 rounded-lg">
               <h3 className="text-lg font-semibold mb-4">Submit Your Trol</h3>
               <div className="space-y-4">
@@ -98,11 +124,20 @@ const Index = () => {
                 </div>
                 <div>
                   <Textarea
-                    placeholder="Your quote or meme (text only for now)"
+                    placeholder="Your quote or meme (optional if uploading an image)"
                     value={submission}
                     onChange={(e) => setSubmission(e.target.value)}
                     className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
                   />
+                </div>
+                <div className="space-y-2">
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    className="bg-white/5 border-white/20 text-white file:bg-white/10 file:text-white file:border-0 file:rounded-md file:px-4 file:py-2 hover:file:bg-white/20"
+                  />
+                  <p className="text-xs text-gray-400">Max file size: 5MB. Supported formats: JPG, PNG, GIF</p>
                 </div>
                 <Button 
                   type="submit"
