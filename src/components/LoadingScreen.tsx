@@ -28,7 +28,7 @@ const LoadingScreen = ({ onLoadComplete }: { onLoadComplete: () => void }) => {
   }, [onLoadComplete]);
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-coin-primary to-coin-secondary flex items-center justify-center">
+    <div className="fixed inset-0 bg-black flex items-center justify-center">
       <img
         src="Coin.png"
         alt="Loading..."
