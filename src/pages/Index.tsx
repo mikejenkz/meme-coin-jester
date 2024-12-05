@@ -50,12 +50,13 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-coin-primary to-coin-secondary">
       {/* Fixed Buy Button */}
       <div className="fixed top-4 right-4 z-50">
-        <Button 
-          onClick={handleBuyClick}
-          className="bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-3 rounded-full shadow-lg"
-        >
-          Buy $TROL
-        </Button>
+        <div className="relative cursor-pointer" onClick={handleBuyClick}>
+          <img 
+            src="Coin.png" 
+            alt="Buy TROL" 
+            className="w-12 h-12 animate-spin-slow hover:scale-110 transition-transform"
+          />
+        </div>
       </div>
 
       {/* Hero Section */}
