@@ -74,7 +74,7 @@ const Index = () => {
           </Button>
           <Button 
             onClick={handleBuyClick}
-            className="bg-yellow-500 hover:bg-yellow-600 text-white text-sm px-6 py-3 rounded-full font-semibold mb-6"
+            className="bg-[#FFD700] hover:bg-[#F7C400] text-white text-base px-8 py-4 rounded-full font-semibold mb-6 shadow-lg"
           >
             Add Liquidity
           </Button>
