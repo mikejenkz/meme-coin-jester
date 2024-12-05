@@ -114,7 +114,7 @@ const Index = () => {
                 </div>
                 <div>
                   <Input
-                    placeholder="Enter your wallet address"
+                    placeholder="Wallet address"
                     value={walletAddress}
                     onChange={(e) => setWalletAddress(e.target.value)}
                     className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
@@ -122,7 +122,7 @@ const Index = () => {
                 </div>
                 <div>
                   <Textarea
-                    placeholder="Your trol or link"
+                    placeholder="TROL link or message"
                     value={submission}
                     onChange={(e) => setSubmission(e.target.value)}
                     className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
