@@ -27,6 +27,7 @@ const FallingCoins = () => {
 
 const Index = () => {
   const [username, setUsername] = useState("");
+  const [walletAddress, setWalletAddress] = useState("");
   const [submission, setSubmission] = useState("");
 
   const handleBuyClick = () => {
@@ -35,12 +36,13 @@ const Index = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!username.trim() || !submission.trim()) {
-      toast("Please fill in both username and your submission!");
+    if (!username.trim() || !submission.trim() || !walletAddress.trim()) {
+      toast("Please fill in all fields!");
       return;
     }
     toast("🎉 Your trol has been submitted for review!");
     setUsername("");
+    setWalletAddress("");
     setSubmission("");
   };
 
@@ -93,6 +95,14 @@ const Index = () => {
                     placeholder="Your username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
+                    className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
+                  />
+                </div>
+                <div>
+                  <Input
+                    placeholder="Enter your wallet address"
+                    value={walletAddress}
+                    onChange={(e) => setWalletAddress(e.target.value)}
                     className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
                   />
                 </div>
