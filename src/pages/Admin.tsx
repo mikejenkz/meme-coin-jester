@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 interface TrolSubmission {
   id: number;
-  content: string;
+  submission_text: string;
   username: string;
   created_at: string;
 }
@@ -50,7 +50,7 @@ const Admin = () => {
         .from("featured_submissions")
         .insert([
           {
-            content: submission.content,
+            content: submission.submission_text, // Changed from content to submission_text
             username: submission.username,
           },
         ])
@@ -79,7 +79,7 @@ const Admin = () => {
           >
             <div>
               <p className="font-semibold">@{submission.username}</p>
-              <p>{submission.content}</p>
+              <p>{submission.submission_text}</p>
               <p className="text-sm text-gray-500">
                 {new Date(submission.created_at).toLocaleDateString()}
               </p>
