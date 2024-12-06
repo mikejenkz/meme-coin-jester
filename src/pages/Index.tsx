@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Rocket, PiggyBank, PartyPopper } from "lucide-react";
+import { Rocket, PiggyBank, PartyPopper, Copy } from "lucide-react";
 import { toast } from "sonner";
 import { useState } from "react";
 import LoadingScreen from "@/components/LoadingScreen";
@@ -27,9 +27,15 @@ const FallingCoins = () => {
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const contractAddress = "0x66f7D08404e5a860152FAf62DeE164D2C266F928";
 
   const handleBuyClick = () => {
     toast("🎉 Just kidding! This is a meme coin after all!");
+  };
+
+  const handleCopyContract = () => {
+    navigator.clipboard.writeText(contractAddress);
+    toast("Contract address copied to clipboard! 📋");
   };
 
   if (isLoading) {
@@ -65,6 +71,19 @@ const Index = () => {
             <br />
             TrolCoin
           </h1>
+          <div className="flex items-center gap-2 mb-4 bg-white/10 rounded-lg px-4 py-2">
+            <span className="text-gray-300">Contract:</span>
+            <span className="text-white">{contractAddress.slice(0, 6)}...{contractAddress.slice(-4)}</span>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleCopyContract}
+              className="hover:bg-white/20"
+            >
+              <Copy className="h-4 w-4" />
+            </Button>
+          </div>
+          
           <p className="text-xl mb-4">The first coin fueled by trolling every shit coin in the game!</p>
           
           <Button 
