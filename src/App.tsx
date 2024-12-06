@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useState } from "react";
+import { Input } from "@/components/ui/input";
 import Index from "./pages/Index";
 import Admin from "./pages/Admin";
 
@@ -28,12 +29,12 @@ const App = () => {
         <div className="min-h-screen flex items-center justify-center bg-background">
           <form onSubmit={handleLogin} className="space-y-4 w-full max-w-sm p-6 bg-card rounded-lg shadow-lg border border-border">
             <h1 className="text-2xl font-bold text-center text-foreground mb-6">Admin Login</h1>
-            <input
+            <Input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter password"
-              className="w-full px-4 py-2 rounded border border-input bg-background text-foreground"
+              autoComplete="current-password"
             />
             <button
               type="submit"
