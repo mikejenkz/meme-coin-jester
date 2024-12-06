@@ -49,7 +49,7 @@ const App = () => {
 
   const handleLogin = (password: string) => {
     console.log("Attempting login with password:", password);
-    if (password === "trolcoin") {
+    if (password === "trolleader93") {
       setIsAuthenticated(true);
     } else {
       alert("Incorrect password");
