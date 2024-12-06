@@ -81,11 +81,15 @@ const Index = () => {
           </Button>
 
           {/* Earn $TROL Section */}
-          <div className="max-w-2xl mx-auto mb-8 bg-white/10 backdrop-blur-sm rounded-lg p-6">
+          <div className="max-w-2xl mx-auto mb-4 bg-white/10 backdrop-blur-sm rounded-lg p-6">
             <h2 className="text-4xl font-bold mb-4">Earn $TROL</h2>
             <p className="text-xl mb-4">Memes fuel the Trolverse - get $TROL to troll!</p>
             <p className="text-lg italic mb-4">Post your best $TROL memes or links with #Trol. The community will decide the winners, and $TROL rewards will be yours!</p>
             <p className="text-yellow-300 font-semibold mb-4">Best weekly trols 🏆</p>
+          </div>
+
+          {/* Weekly Winner Box */}
+          <div className="max-w-2xl mx-auto mb-8 bg-white/20 backdrop-blur-sm rounded-lg p-4 border border-white/10 hover:bg-white/25 transition-colors">
             <p className="text-lg italic text-gray-200">
               <span className="text-gray-400">@soldmyhomeforTROL:</span> "Buy coin in morning, sell at night." -Confucius
             </p>
