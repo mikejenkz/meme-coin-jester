@@ -30,12 +30,17 @@ const Admin = () => {
   const { data: submissions, isLoading } = useQuery({
     queryKey: ["trol-submissions"],
     queryFn: async () => {
+      console.log("Fetching submissions...");
       const { data, error } = await supabase
         .from("trol_submissions")
         .select("*")
         .order("created_at", { ascending: false });
 
-      if (error) throw error;
+      if (error) {
+        console.error("Error fetching submissions:", error);
+        throw error;
+      }
+      console.log("Fetched submissions:", data);
       return data as TrolSubmission[];
     },
   });
@@ -55,16 +60,22 @@ const Admin = () => {
   };
 
   const handleDelete = async (id: string) => {
+    console.log("Deleting submission with ID:", id);
     try {
       const { error } = await supabase
         .from("trol_submissions")
         .delete()
         .eq("id", id);
 
-      if (error) throw error;
+      if (error) {
+        console.error("Error deleting submission:", error);
+        throw error;
+      }
 
+      console.log("Successfully deleted submission");
+      
       // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ["trol-submissions"] });
+      await queryClient.invalidateQueries({ queryKey: ["trol-submissions"] });
       
       toast({
         title: "Success",
