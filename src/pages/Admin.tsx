@@ -44,6 +44,8 @@ const Admin = () => {
 
   const handleFeature = async (submission: TrolSubmission) => {
     try {
+      console.log("Featuring submission:", submission); // Debug log
+      
       const { error } = await supabase
         .from("featured_submissions")
         .insert([
@@ -51,9 +53,14 @@ const Admin = () => {
             content: submission.content,
             username: submission.username,
           },
-        ]);
+        ])
+        .select();
 
-      if (error) throw error;
+      if (error) {
+        console.error("Supabase error:", error); // Debug log
+        throw error;
+      }
+      
       toast.success("Added to featured submissions!");
     } catch (error) {
       console.error("Error featuring submission:", error);
