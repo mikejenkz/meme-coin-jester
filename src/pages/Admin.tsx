@@ -1,18 +1,17 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabaseClient";
 import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
-  TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Copy } from "lucide-react";
+import { Copy, Trash2 } from "lucide-react";
 import { format } from "date-fns";
+import { useToast } from "@/components/ui/use-toast";
 
 interface TrolSubmission {
   id: string;
@@ -26,6 +25,8 @@ const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
 
   const { data: submissions, isLoading } = useQuery({
     queryKey: ["trol-submissions"],
@@ -52,6 +53,32 @@ const Admin = () => {
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
+  };
+
+  const handleDelete = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from("trol_submissions")
+        .delete()
+        .eq("id", id);
+
+      if (error) throw error;
+
+      // Invalidate and refetch
+      await queryClient.invalidateQueries({ queryKey: ["trol-submissions"] });
+      
+      toast({
+        title: "Success",
+        description: "Submission deleted successfully",
+      });
+    } catch (error) {
+      console.error("Error deleting submission:", error);
+      toast({
+        title: "Error",
+        description: "Failed to delete submission",
+        variant: "destructive",
+      });
+    }
   };
 
   if (!isAuthenticated) {
@@ -119,6 +146,14 @@ const Admin = () => {
                           onClick={() => copyToClipboard(submission.wallet_address)}
                         >
                           <Copy className="h-4 w-4 text-white" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 flex-shrink-0 hover:bg-red-500/20"
+                          onClick={() => handleDelete(submission.id)}
+                        >
+                          <Trash2 className="h-4 w-4 text-red-500" />
                         </Button>
                       </TableCell>
                     </TableRow>
