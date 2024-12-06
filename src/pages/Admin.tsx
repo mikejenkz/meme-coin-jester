@@ -26,14 +26,25 @@ const Admin = () => {
     },
   });
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: number, submissionText: string) => {
     try {
-      const { error } = await supabase
+      console.log("Deleting submission:", id, submissionText);
+      
+      // Delete from trol_submissions
+      const { error: submissionError } = await supabase
         .from("trol_submissions")
         .delete()
         .eq("id", id);
 
-      if (error) throw error;
+      if (submissionError) throw submissionError;
+      
+      // Delete from featured_submissions if it exists there
+      const { error: featuredError } = await supabase
+        .from("featured_submissions")
+        .delete()
+        .eq("content", submissionText);
+
+      if (featuredError) throw featuredError;
       
       toast.success("Submission deleted successfully!");
       refetch();
@@ -106,7 +117,7 @@ const Admin = () => {
               <Button
                 variant="secondary"
                 size="icon"
-                onClick={() => handleDelete(submission.id)}
+                onClick={() => handleDelete(submission.id, submission.submission_text)}
                 className="hover:bg-accent"
               >
                 <Trash2 className="h-4 w-4 text-destructive" />
