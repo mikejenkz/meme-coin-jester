@@ -10,7 +10,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Copy, Trash2 } from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
+import { format } from "date-fns";
 
 interface TrolSubmission {
   id: string;
@@ -143,39 +144,49 @@ const Admin = () => {
                 {submissions?.map((submission) => (
                   <TableRow key={submission.id}>
                     <TableCell className="text-white">
-                      <div className="flex flex-col space-y-4">
+                      <div className="flex flex-col space-y-2">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-2">
-                            <span className="font-mono truncate">{submission.wallet_address}</span>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="h-8 w-8 flex-shrink-0"
-                              onClick={() => copyToClipboard(submission.wallet_address)}
-                            >
-                              <Copy className="h-4 w-4 text-white" />
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="h-8 w-8 flex-shrink-0 hover:bg-red-500/20"
-                              onClick={() => handleDelete(submission.id)}
-                            >
-                              <Trash2 className="h-4 w-4 text-red-500" />
-                            </Button>
+                            <span className="text-sm text-gray-300">
+                              {format(new Date(submission.created_at), 'MMM d, yyyy HH:mm')}
+                            </span>
+                            <span className="text-sm text-gray-300">
+                              by {submission.username}
+                            </span>
                           </div>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <span className="font-mono truncate">{submission.wallet_address}</span>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8"
+                            onClick={() => copyToClipboard(submission.wallet_address)}
+                          >
+                            <Copy className="h-4 w-4 text-white" />
+                          </Button>
                         </div>
                         <div className="bg-white/5 p-4 rounded-md">
                           <div className="flex items-center justify-between">
                             <span className="flex-grow">{submission.submission_text}</span>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="h-8 w-8 flex-shrink-0 ml-2"
-                              onClick={() => copyToClipboard(submission.submission_text)}
-                            >
-                              <Copy className="h-4 w-4 text-white" />
-                            </Button>
+                            <div className="flex items-center space-x-2">
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-8 w-8"
+                                onClick={() => copyToClipboard(submission.submission_text)}
+                              >
+                                <Copy className="h-4 w-4 text-white" />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-8 w-8 hover:bg-red-500/20"
+                                onClick={() => handleDelete(submission.id)}
+                              >
+                                <Trash2 className="h-4 w-4 text-red-500" />
+                              </Button>
+                            </div>
                           </div>
                         </div>
                       </div>
