@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabaseClient";
 import {
@@ -8,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Input } from "@/components/ui/input";
 import { format } from "date-fns";
 
 interface TrolSubmission {
@@ -20,6 +22,10 @@ interface TrolSubmission {
 }
 
 const Admin = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
   const { data: submissions, isLoading } = useQuery({
     queryKey: ["trol-submissions"],
     queryFn: async () => {
@@ -32,6 +38,46 @@ const Admin = () => {
       return data as TrolSubmission[];
     },
   });
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === "trolleader93") {
+      setIsAuthenticated(true);
+      setError("");
+    } else {
+      setError("Incorrect password");
+    }
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-coin-primary to-coin-secondary p-8">
+        <div className="container mx-auto max-w-md">
+          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+            <h1 className="text-3xl font-bold text-white mb-6">TROL Admin Login</h1>
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div>
+                <Input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter password"
+                  className="w-full"
+                />
+              </div>
+              {error && <p className="text-red-500">{error}</p>}
+              <button
+                type="submit"
+                className="w-full bg-white/20 hover:bg-white/30 text-white font-bold py-2 px-4 rounded"
+              >
+                Login
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (isLoading) {
     return (
@@ -67,7 +113,7 @@ const Admin = () => {
                   </TableCell>
                   <TableCell className="text-white">{submission.username}</TableCell>
                   <TableCell className="text-white font-mono text-sm">
-                    {submission.wallet_address.slice(0, 6)}...{submission.wallet_address.slice(-4)}
+                    {submission.wallet_address}
                   </TableCell>
                   <TableCell className="text-white">{submission.submission_text}</TableCell>
                   <TableCell className="text-white">{submission.status}</TableCell>
