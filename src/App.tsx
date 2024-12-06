@@ -16,7 +16,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/troladmin" element={<Admin />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
