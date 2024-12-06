@@ -58,11 +58,15 @@ const Index = () => {
 
       return uniqueSubmissions;
     },
-    refetchInterval: 2000, // Refetch every 2 seconds to keep data in sync
+    refetchInterval: 2000,
   });
 
   const handleBuyClick = () => {
     toast("🎉 Just kidding! This is a meme coin after all!");
+  };
+
+  const handleAddLiquidity = () => {
+    window.open("https://pancakeswap.finance/v2/add/0x66f7D08404e5a860152FAf62DeE164D2C266F928/0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c?increase=1", "_blank");
   };
 
   const handleCopyContract = () => {
@@ -125,7 +129,7 @@ const Index = () => {
             Join the Trolvolution!
           </Button>
           <Button 
-            onClick={handleBuyClick}
+            onClick={handleAddLiquidity}
             className="bg-[#FFD700] hover:bg-[#F7C400] text-white text-base px-8 py-4 rounded-full font-semibold mb-6 shadow-lg"
           >
             Add Liquidity
