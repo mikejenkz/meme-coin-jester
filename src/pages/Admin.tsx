@@ -8,6 +8,7 @@ interface TrolSubmission {
   id: number;
   submission_text: string;
   username: string;
+  wallet_address: string;
   created_at: string;
 }
 
@@ -44,20 +45,20 @@ const Admin = () => {
 
   const handleFeature = async (submission: TrolSubmission) => {
     try {
-      console.log("Featuring submission:", submission); // Debug log
+      console.log("Featuring submission:", submission);
       
       const { error } = await supabase
         .from("featured_submissions")
         .insert([
           {
-            content: submission.submission_text, // Changed from content to submission_text
+            content: submission.submission_text,
             username: submission.username,
           },
         ])
         .select();
 
       if (error) {
-        console.error("Supabase error:", error); // Debug log
+        console.error("Supabase error:", error);
         throw error;
       }
       
@@ -70,16 +71,25 @@ const Admin = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
+      <h1 className="text-2xl font-bold mb-4 text-white">Admin Dashboard</h1>
       <div className="grid gap-4">
         {submissions?.map((submission) => (
           <div
             key={submission.id}
-            className="bg-white p-4 rounded-lg shadow flex justify-between items-center"
+            className="bg-white/5 p-6 rounded-lg shadow flex justify-between items-start border border-white/10"
           >
-            <div>
-              <p className="font-semibold">@{submission.username}</p>
-              <p>{submission.submission_text}</p>
+            <div className="space-y-2">
+              <p className="font-semibold text-white">@{submission.username}</p>
+              <p className="text-gray-300">{submission.submission_text}</p>
+              <p 
+                className="text-sm text-gray-400 cursor-pointer hover:text-white"
+                onClick={() => {
+                  navigator.clipboard.writeText(submission.wallet_address);
+                  toast.success("Wallet address copied!");
+                }}
+              >
+                {submission.wallet_address}
+              </p>
               <p className="text-sm text-gray-500">
                 {new Date(submission.created_at).toLocaleDateString()}
               </p>
@@ -89,13 +99,15 @@ const Admin = () => {
                 variant="ghost"
                 size="icon"
                 onClick={() => handleFeature(submission)}
+                className="hover:bg-white/10"
               >
-                <Plus className="h-4 w-4" />
+                <Plus className="h-4 w-4 text-white" />
               </Button>
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => handleDelete(submission.id)}
+                className="hover:bg-white/10"
               >
                 <Trash2 className="h-4 w-4 text-red-500" />
               </Button>
