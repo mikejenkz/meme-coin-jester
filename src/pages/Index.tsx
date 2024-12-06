@@ -80,10 +80,10 @@ const Index = () => {
             Add Liquidity
           </Button>
 
-          {/* Best Weekly Trols Section */}
+          {/* Earn $TROL Section */}
           <div className="max-w-2xl mx-auto mb-8 bg-white/10 backdrop-blur-sm rounded-lg p-6">
-            <h2 className="text-2xl font-bold mb-4">Best Weekly Trols</h2>
-            <p className="text-lg italic">"The best investment is the one that makes you laugh while others cry."</p>
+            <h2 className="text-2xl font-bold mb-4">Earn $TROL</h2>
+            <p className="text-lg">Memes fuel the Trolverse - get rewarded for your creativity!</p>
           </div>
 
           {/* Submission Form */}
