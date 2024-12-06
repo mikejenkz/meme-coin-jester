@@ -62,7 +62,7 @@ const Index = () => {
   });
 
   const handleBuyClick = () => {
-    toast("🎉 Just kidding! This is a meme coin after all!");
+    window.open("https://pancakeswap.finance/?outputCurrency=0x66f7D08404e5a860152FAf62DeE164D2C266F928", "_blank");
   };
 
   const handleAddLiquidity = () => {
@@ -126,7 +126,7 @@ const Index = () => {
             onClick={handleBuyClick}
             className="bg-green-500 hover:bg-green-600 text-white text-lg px-8 py-6 rounded-full font-bold mb-2"
           >
-            Join the Trolvolution!
+            Buy $TROL
           </Button>
           <Button 
             onClick={handleAddLiquidity}
