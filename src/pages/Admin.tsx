@@ -10,6 +10,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Copy } from "lucide-react";
 import { format } from "date-fns";
 
 interface TrolSubmission {
@@ -47,6 +49,10 @@ const Admin = () => {
     } else {
       setError("Incorrect password");
     }
+  };
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
   };
 
   if (!isAuthenticated) {
@@ -112,10 +118,28 @@ const Admin = () => {
                     {format(new Date(submission.created_at), "MMM d, yyyy HH:mm")}
                   </TableCell>
                   <TableCell className="text-white">{submission.username}</TableCell>
-                  <TableCell className="text-white font-mono text-sm">
+                  <TableCell className="text-white font-mono text-sm flex items-center gap-2">
                     {submission.wallet_address}
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8"
+                      onClick={() => copyToClipboard(submission.wallet_address)}
+                    >
+                      <Copy className="h-4 w-4 text-white" />
+                    </Button>
                   </TableCell>
-                  <TableCell className="text-white">{submission.submission_text}</TableCell>
+                  <TableCell className="text-white flex items-center gap-2">
+                    {submission.submission_text}
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8"
+                      onClick={() => copyToClipboard(submission.submission_text)}
+                    >
+                      <Copy className="h-4 w-4 text-white" />
+                    </Button>
+                  </TableCell>
                   <TableCell className="text-white">{submission.status}</TableCell>
                 </TableRow>
               ))}
