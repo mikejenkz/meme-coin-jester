@@ -85,7 +85,7 @@ const Index = () => {
             <h2 className="text-4xl font-bold mb-4">Earn $TROL</h2>
             <p className="text-xl mb-4">Memes fuel the Trolverse - get $TROL to troll!</p>
             <p className="text-lg italic mb-4">Post your best $TROL memes or links with #Trol. The community will decide the winners, and $TROL rewards will be yours!</p>
-            <p className="text-yellow-300 font-semibold mb-4">Best weekly trols 🏆</p>
+            <p className="text-yellow-300 font-semibold text-2xl mb-4">Best Weekly TROLS <span className="font-bold">🏆</span></p>
           </div>
 
           {/* Weekly Winner Box */}
