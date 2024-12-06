@@ -100,52 +100,54 @@ const Admin = () => {
         <h1 className="text-3xl font-bold text-white mb-6">TROL Submissions Admin</h1>
         
         <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="text-white w-1/4">Date</TableHead>
-                <TableHead className="text-white w-1/4">Username</TableHead>
-                <TableHead className="text-white w-1/2">Wallet</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {submissions?.map((submission) => (
-                <div key={submission.id} className="mb-6">
-                  <TableRow>
-                    <TableCell className="text-white w-1/4">
-                      {format(new Date(submission.created_at), "MMM d")}
-                    </TableCell>
-                    <TableCell className="text-white w-1/4">{submission.username}</TableCell>
-                    <TableCell className="text-white font-mono text-sm w-1/2 flex items-center gap-2">
-                      {submission.wallet_address}
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8"
-                        onClick={() => copyToClipboard(submission.wallet_address)}
-                      >
-                        <Copy className="h-4 w-4 text-white" />
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell colSpan={3} className="text-white flex items-center gap-2 bg-white/5">
-                      <span className="font-semibold mr-2">Submission:</span>
-                      {submission.submission_text}
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8"
-                        onClick={() => copyToClipboard(submission.submission_text)}
-                      >
-                        <Copy className="h-4 w-4 text-white" />
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                </div>
-              ))}
-            </TableBody>
-          </Table>
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="text-white w-[20%]">Date</TableHead>
+                  <TableHead className="text-white w-[30%]">Username</TableHead>
+                  <TableHead className="text-white w-[50%]">Wallet</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {submissions?.map((submission) => (
+                  <div key={submission.id} className="mb-6">
+                    <TableRow className="border-b border-white/10">
+                      <TableCell className="text-white w-[20%]">
+                        {format(new Date(submission.created_at), "MMM d")}
+                      </TableCell>
+                      <TableCell className="text-white w-[30%]">{submission.username}</TableCell>
+                      <TableCell className="text-white font-mono text-sm w-[50%] flex items-center gap-2">
+                        <span className="truncate">{submission.wallet_address}</span>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 flex-shrink-0"
+                          onClick={() => copyToClipboard(submission.wallet_address)}
+                        >
+                          <Copy className="h-4 w-4 text-white" />
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell colSpan={3} className="text-white flex items-center gap-2 bg-white/5">
+                        <span className="font-semibold mr-2">Submission:</span>
+                        <span className="flex-grow">{submission.submission_text}</span>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 flex-shrink-0"
+                          onClick={() => copyToClipboard(submission.submission_text)}
+                        >
+                          <Copy className="h-4 w-4 text-white" />
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  </div>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </div>
       </div>
     </div>
