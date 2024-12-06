@@ -126,7 +126,7 @@ const Index = () => {
             onClick={handleBuyClick}
             className="bg-green-500 hover:bg-green-600 text-white text-lg px-8 py-6 rounded-full font-bold mb-2"
           >
-            Buy $TROL
+            Join the Trolvolution!
           </Button>
           <Button 
             onClick={handleAddLiquidity}
