@@ -103,20 +103,20 @@ const Admin = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="text-white">Date</TableHead>
-                <TableHead className="text-white">Username</TableHead>
-                <TableHead className="text-white">Wallet</TableHead>
+                <TableHead className="text-white w-1/4">Date</TableHead>
+                <TableHead className="text-white w-1/4">Username</TableHead>
+                <TableHead className="text-white w-1/2">Wallet</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {submissions?.map((submission) => (
                 <div key={submission.id} className="mb-6">
                   <TableRow>
-                    <TableCell className="text-white">
+                    <TableCell className="text-white w-1/4">
                       {format(new Date(submission.created_at), "MMM d")}
                     </TableCell>
-                    <TableCell className="text-white">{submission.username}</TableCell>
-                    <TableCell className="text-white font-mono text-sm flex items-center gap-2">
+                    <TableCell className="text-white w-1/4">{submission.username}</TableCell>
+                    <TableCell className="text-white font-mono text-sm w-1/2 flex items-center gap-2">
                       {submission.wallet_address}
                       <Button
                         variant="ghost"
