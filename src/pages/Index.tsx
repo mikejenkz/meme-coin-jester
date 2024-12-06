@@ -91,7 +91,7 @@ const Index = () => {
           {/* Weekly Winner Box */}
           <div className="max-w-2xl mx-auto mb-8 bg-white/20 backdrop-blur-sm rounded-lg p-4 border border-white/10 hover:bg-white/25 transition-colors">
             <p className="text-lg italic text-gray-200">
-              <span className="text-gray-400">@soldmyhomeforTROL:</span> "Buy coin in morning, sell at night." -Confucius
+              <span className="text-green-500">@soldmyhomeforTROL:</span> "Buy coin in morning, sell at night." -Confucius
             </p>
           </div>
 
