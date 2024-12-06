@@ -5,6 +5,8 @@ import { useState } from "react";
 import LoadingScreen from "@/components/LoadingScreen";
 import Features from "@/components/Features";
 import TrolSubmissionForm from "@/components/TrolSubmissionForm";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/lib/supabaseClient";
 
 const FallingCoins = () => {
   return (
@@ -28,6 +30,19 @@ const FallingCoins = () => {
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
   const contractAddress = "0x66f7D08404e5a860152FAf62DeE164D2C266F928";
+
+  const { data: featuredSubmissions } = useQuery({
+    queryKey: ["featured-submissions"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("featured_submissions")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+      return data;
+    },
+  });
 
   const handleBuyClick = () => {
     toast("🎉 Just kidding! This is a meme coin after all!");
@@ -113,6 +128,15 @@ const Index = () => {
               <span className="text-green-500">@soldmyhomeforTROL:</span> "Buy coin in morning, sell at night." -Confucius
             </p>
           </div>
+
+          {/* Featured Submissions */}
+          {featuredSubmissions?.map((submission) => (
+            <div key={submission.id} className="max-w-2xl mx-auto mb-8 bg-white/20 backdrop-blur-sm rounded-lg p-4 border border-white/10 hover:bg-white/25 transition-colors">
+              <p className="text-lg italic text-gray-200">
+                <span className="text-green-500">@{submission.username}:</span> {submission.content}
+              </p>
+            </div>
+          ))}
 
           {/* Submission Form */}
           <div className="max-w-md mx-auto w-full">
