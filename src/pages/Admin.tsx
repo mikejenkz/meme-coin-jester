@@ -110,8 +110,8 @@ const Admin = () => {
             </TableHeader>
             <TableBody>
               {submissions?.map((submission) => (
-                <>
-                  <TableRow key={`${submission.id}-main`}>
+                <div key={submission.id} className="mb-6">
+                  <TableRow>
                     <TableCell className="text-white">
                       {format(new Date(submission.created_at), "MMM d")}
                     </TableCell>
@@ -128,7 +128,7 @@ const Admin = () => {
                       </Button>
                     </TableCell>
                   </TableRow>
-                  <TableRow key={`${submission.id}-submission`}>
+                  <TableRow>
                     <TableCell colSpan={3} className="text-white flex items-center gap-2 bg-white/5">
                       <span className="font-semibold mr-2">Submission:</span>
                       {submission.submission_text}
@@ -142,7 +142,7 @@ const Admin = () => {
                       </Button>
                     </TableCell>
                   </TableRow>
-                </>
+                </div>
               ))}
             </TableBody>
           </Table>
