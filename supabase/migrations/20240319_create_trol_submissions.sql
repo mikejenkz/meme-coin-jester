@@ -24,3 +24,10 @@ create policy "Users can view their own submissions"
     for select
     to public
     using (true);
+
+-- Create policy to allow deletion of submissions
+create policy "Enable delete for authenticated users"
+    on public.trol_submissions
+    for delete
+    to public
+    using (true);
