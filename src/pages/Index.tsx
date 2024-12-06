@@ -34,12 +34,18 @@ const Index = () => {
   const { data: featuredSubmissions } = useQuery({
     queryKey: ["featured-submissions"],
     queryFn: async () => {
+      console.log("Fetching featured submissions...");
       const { data, error } = await supabase
         .from("featured_submissions")
         .select("*")
         .order("created_at", { ascending: false });
 
-      if (error) throw error;
+      if (error) {
+        console.error("Error fetching featured submissions:", error);
+        throw error;
+      }
+
+      console.log("Received featured submissions:", data);
 
       // Filter out duplicates based on content
       const uniqueSubmissions = data.reduce((acc: any[], current: any) => {
@@ -52,6 +58,7 @@ const Index = () => {
 
       return uniqueSubmissions;
     },
+    refetchInterval: 2000, // Refetch every 2 seconds to keep data in sync
   });
 
   const handleBuyClick = () => {
