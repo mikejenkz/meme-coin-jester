@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Rocket, PiggyBank, PartyPopper, Copy } from "lucide-react";
 import { toast } from "sonner";
 import { useState } from "react";
 import LoadingScreen from "@/components/LoadingScreen";
@@ -7,25 +6,7 @@ import Features from "@/components/Features";
 import TrolSubmissionForm from "@/components/TrolSubmissionForm";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabaseClient";
-
-const FallingCoins = () => {
-  return (
-    <div className="absolute top-0 left-0 w-full h-48 overflow-hidden pointer-events-none">
-      {[...Array(20)].map((_, i) => (
-        <img
-          key={i}
-          src="Coin.png"
-          alt="Falling Coin"
-          className="absolute w-8 h-8"
-          style={{
-            left: `${(i * 5) % 100}%`,
-            animation: `fall ${2 + Math.random() * 3}s linear infinite`,
-          }}
-        />
-      ))}
-    </div>
-  );
-};
+import HeroSection from "@/components/HeroSection";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -47,7 +28,6 @@ const Index = () => {
 
       console.log("Received featured submissions:", data);
 
-      // Filter out duplicates based on content
       const uniqueSubmissions = data.reduce((acc: any[], current: any) => {
         const exists = acc.find((item) => item.content === current.content);
         if (!exists) {
@@ -58,16 +38,11 @@ const Index = () => {
 
       return uniqueSubmissions;
     },
-    refetchInterval: 2000, // Refetch every 2 seconds to keep data in sync
+    refetchInterval: 2000,
   });
 
   const handleBuyClick = () => {
     toast("🎉 Just kidding! This is a meme coin after all!");
-  };
-
-  const handleCopyContract = () => {
-    navigator.clipboard.writeText(contractAddress);
-    toast("Contract address copied to clipboard! 📋");
   };
 
   if (isLoading) {
@@ -82,82 +57,39 @@ const Index = () => {
           <img 
             src="Coin.png" 
             alt="Buy TROL" 
-            className="w-12 h-12 animate-spin-slow hover:scale-110 transition-transform"
+            className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 animate-spin-slow hover:scale-110 transition-transform"
           />
         </div>
       </div>
 
       {/* Hero Section */}
-      <div className="container pt-4 pb-6 text-white text-center relative">
-        <FallingCoins />
-        <div className="flex flex-col items-center justify-center">
-          <div className="animate-float mb-4">
-            <img 
-              src="IMG_7153-removebg-preview.png" 
-              alt="TrollCoin Mascot" 
-              className="w-32 h-32 object-contain border-0"
-            />
-          </div>
-          <h1 className="text-6xl font-bold mt-8 mb-2">
-            <span style={{ animation: 'colorChange 3s infinite' }}>$TROL</span>
-            <br />
-            TrolCoin
-          </h1>
-          <div className="flex items-center gap-2 mb-4 bg-white/10 rounded-lg px-4 py-2">
-            <span className="text-gray-300">Contract:</span>
-            <span className="text-white">{contractAddress.slice(0, 6)}...{contractAddress.slice(-4)}</span>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={handleCopyContract}
-              className="hover:bg-white/20"
-            >
-              <Copy className="h-4 w-4" />
-            </Button>
-          </div>
-          
-          <p className="text-xl mb-4">The first coin fueled by trolling every shit coin in the game!</p>
-          
-          <Button 
-            onClick={handleBuyClick}
-            className="bg-green-500 hover:bg-green-600 text-white text-lg px-8 py-6 rounded-full font-bold mb-2"
+      <HeroSection handleBuyClick={handleBuyClick} contractAddress={contractAddress} />
+
+      {/* Earn $TROL Section */}
+      <div className="max-w-2xl mx-auto mb-4 bg-white/10 backdrop-blur-sm rounded-lg p-6">
+        <h2 className="text-4xl font-bold mb-4 text-white">Earn $TROL</h2>
+        <p className="text-xl mb-4 text-white">Memes fuel the Trolverse - get $TROL to troll!</p>
+        <p className="text-lg italic mb-4 text-white">Post your best $TROL memes or links with #Trol. The community will decide the winners, and $TROL rewards will be yours!</p>
+        <p className="text-yellow-300 font-semibold text-2xl mb-4">Best Weekly TROLS <span className="font-bold">🏆</span></p>
+      </div>
+
+      {/* Featured Submissions */}
+      <div className="w-full max-w-2xl mx-auto">
+        {featuredSubmissions?.map((submission) => (
+          <div 
+            key={submission.id} 
+            className="w-full mb-8 bg-white/20 backdrop-blur-sm rounded-lg p-6 border border-white/10 hover:bg-white/25 transition-colors min-h-[100px] flex items-center"
           >
-            Join the Trolvolution!
-          </Button>
-          <Button 
-            onClick={handleBuyClick}
-            className="bg-[#FFD700] hover:bg-[#F7C400] text-white text-base px-8 py-4 rounded-full font-semibold mb-6 shadow-lg"
-          >
-            Add Liquidity
-          </Button>
-
-          {/* Earn $TROL Section */}
-          <div className="max-w-2xl mx-auto mb-4 bg-white/10 backdrop-blur-sm rounded-lg p-6">
-            <h2 className="text-4xl font-bold mb-4">Earn $TROL</h2>
-            <p className="text-xl mb-4">Memes fuel the Trolverse - get $TROL to troll!</p>
-            <p className="text-lg italic mb-4">Post your best $TROL memes or links with #Trol. The community will decide the winners, and $TROL rewards will be yours!</p>
-            <p className="text-yellow-300 font-semibold text-2xl mb-4">Best Weekly TROLS <span className="font-bold">🏆</span></p>
+            <p className="text-lg italic text-gray-200 w-full">
+              <span className="text-green-500">@{submission.username}:</span> {submission.content}
+            </p>
           </div>
+        ))}
+      </div>
 
-          {/* Featured Submissions */}
-          <div className="w-full max-w-2xl mx-auto">
-            {featuredSubmissions?.map((submission) => (
-              <div 
-                key={submission.id} 
-                className="w-full mb-8 bg-white/20 backdrop-blur-sm rounded-lg p-6 border border-white/10 hover:bg-white/25 transition-colors min-h-[100px] flex items-center"
-              >
-                <p className="text-lg italic text-gray-200 w-full">
-                  <span className="text-green-500">@{submission.username}:</span> {submission.content}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* Submission Form */}
-          <div className="max-w-md mx-auto w-full">
-            <TrolSubmissionForm />
-          </div>
-        </div>
+      {/* Submission Form */}
+      <div className="max-w-md mx-auto w-full">
+        <TrolSubmissionForm />
       </div>
 
       {/* Features */}
