@@ -1,11 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Rocket, PiggyBank, PartyPopper } from "lucide-react";
 import { toast } from "sonner";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import LoadingScreen from "@/components/LoadingScreen";
+import Features from "@/components/Features";
+import TrolSubmissionForm from "@/components/TrolSubmissionForm";
 
 const FallingCoins = () => {
   return (
@@ -27,25 +26,10 @@ const FallingCoins = () => {
 };
 
 const Index = () => {
-  const [username, setUsername] = useState("");
-  const [walletAddress, setWalletAddress] = useState("");
-  const [submission, setSubmission] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   const handleBuyClick = () => {
     toast("🎉 Just kidding! This is a meme coin after all!");
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!username.trim() || !submission.trim() || !walletAddress.trim()) {
-      toast("Please fill in all fields!");
-      return;
-    }
-    toast("🎉 Your trol has been submitted for review!");
-    setUsername("");
-    setWalletAddress("");
-    setSubmission("");
   };
 
   if (isLoading) {
@@ -106,66 +90,13 @@ const Index = () => {
               <p className="text-gray-300">@soldmyhomeforTROL: "Buy coin in morning, sell at night." -Confucius</p>
             </div>
 
-            {/* Submission Form */}
-            <form onSubmit={handleSubmit} className="mt-6 bg-white/5 p-4 rounded-lg">
-              <h3 className="text-lg font-semibold mb-4">Submit Your Trol</h3>
-              <div className="space-y-4">
-                <div>
-                  <Input
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
-                  />
-                </div>
-                <div>
-                  <Input
-                    placeholder="Wallet address"
-                    value={walletAddress}
-                    onChange={(e) => setWalletAddress(e.target.value)}
-                    className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
-                  />
-                </div>
-                <div>
-                  <Textarea
-                    placeholder="TROL link or message"
-                    value={submission}
-                    onChange={(e) => setSubmission(e.target.value)}
-                    className="bg-white/5 border-white/20 text-white placeholder:text-gray-400"
-                  />
-                </div>
-                <Button 
-                  type="submit"
-                  className="w-full bg-green-500 hover:bg-green-600 text-white"
-                >
-                  Earn TROL!
-                </Button>
-              </div>
-            </form>
+            <TrolSubmissionForm />
           </div>
         </div>
       </div>
 
       {/* Features */}
-      <div className="container py-20">
-        <div className="grid md:grid-cols-3 gap-8">
-          <Card className="p-6 bg-white/90 backdrop-blur">
-            <Rocket className="w-12 h-12 mb-4 text-coin-primary" />
-            <h3 className="text-xl font-bold mb-2">To The Moon!</h3>
-            <p className="text-gray-600">And back because it's just for the LOLs</p>
-          </Card>
-          <Card className="p-6 bg-white/90 backdrop-blur">
-            <PiggyBank className="w-12 h-12 mb-4 text-coin-primary" />
-            <h3 className="text-xl font-bold mb-2">Revolutionary Technology</h3>
-            <p className="text-gray-600">Built on cutting-edge tech... just kidding, it's a troll coin</p>
-          </Card>
-          <Card className="p-6 bg-white/90 backdrop-blur">
-            <PartyPopper className="w-12 h-12 mb-4 text-coin-primary" />
-            <h3 className="text-xl font-bold mb-2">Amazing Community</h3>
-            <p className="text-gray-600">The only community that gets the joke</p>
-          </Card>
-        </div>
-      </div>
+      <Features />
 
       {/* About Us Section */}
       <div className="container py-12 px-4">
