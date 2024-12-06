@@ -106,39 +106,43 @@ const Admin = () => {
                 <TableHead className="text-white">Date</TableHead>
                 <TableHead className="text-white">Username</TableHead>
                 <TableHead className="text-white">Wallet</TableHead>
-                <TableHead className="text-white">Submission</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {submissions?.map((submission) => (
-                <TableRow key={submission.id}>
-                  <TableCell className="text-white">
-                    {format(new Date(submission.created_at), "MMM d")}
-                  </TableCell>
-                  <TableCell className="text-white">{submission.username}</TableCell>
-                  <TableCell className="text-white font-mono text-sm flex items-center gap-2">
-                    {submission.wallet_address}
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-8 w-8"
-                      onClick={() => copyToClipboard(submission.wallet_address)}
-                    >
-                      <Copy className="h-4 w-4 text-white" />
-                    </Button>
-                  </TableCell>
-                  <TableCell className="text-white flex items-center gap-2">
-                    {submission.submission_text}
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-8 w-8"
-                      onClick={() => copyToClipboard(submission.submission_text)}
-                    >
-                      <Copy className="h-4 w-4 text-white" />
-                    </Button>
-                  </TableCell>
-                </TableRow>
+                <>
+                  <TableRow key={`${submission.id}-main`}>
+                    <TableCell className="text-white">
+                      {format(new Date(submission.created_at), "MMM d")}
+                    </TableCell>
+                    <TableCell className="text-white">{submission.username}</TableCell>
+                    <TableCell className="text-white font-mono text-sm flex items-center gap-2">
+                      {submission.wallet_address}
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8"
+                        onClick={() => copyToClipboard(submission.wallet_address)}
+                      >
+                        <Copy className="h-4 w-4 text-white" />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow key={`${submission.id}-submission`}>
+                    <TableCell colSpan={3} className="text-white flex items-center gap-2 bg-white/5">
+                      <span className="font-semibold mr-2">Submission:</span>
+                      {submission.submission_text}
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8"
+                        onClick={() => copyToClipboard(submission.submission_text)}
+                      >
+                        <Copy className="h-4 w-4 text-white" />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                </>
               ))}
             </TableBody>
           </Table>
