@@ -122,17 +122,13 @@ const Index = () => {
             <p className="text-yellow-300 font-semibold text-2xl mb-4">Best Weekly TROLS <span className="font-bold">🏆</span></p>
           </div>
 
-          {/* Weekly Winner Box */}
-          <div className="max-w-2xl mx-auto mb-8 bg-white/20 backdrop-blur-sm rounded-lg p-4 border border-white/10 hover:bg-white/25 transition-colors">
-            <p className="text-lg italic text-gray-200">
-              <span className="text-green-500">@soldmyhomeforTROL:</span> "Buy coin in morning, sell at night." -Confucius
-            </p>
-          </div>
-
           {/* Featured Submissions */}
           {featuredSubmissions?.map((submission) => (
-            <div key={submission.id} className="max-w-2xl mx-auto mb-8 bg-white/20 backdrop-blur-sm rounded-lg p-6 border border-white/10 hover:bg-white/25 transition-colors">
-              <p className="text-lg italic text-gray-200">
+            <div 
+              key={submission.id} 
+              className="max-w-2xl mx-auto mb-8 bg-white/20 backdrop-blur-sm rounded-lg p-6 border border-white/10 hover:bg-white/25 transition-colors min-h-[100px] flex items-center"
+            >
+              <p className="text-lg italic text-gray-200 w-full">
                 <span className="text-green-500">@{submission.username}:</span> {submission.content}
               </p>
             </div>
