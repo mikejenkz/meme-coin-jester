@@ -102,13 +102,6 @@ const Admin = () => {
         <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
           <div className="overflow-x-auto">
             <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-white w-[20%]">Date</TableHead>
-                  <TableHead className="text-white w-[30%]">Username</TableHead>
-                  <TableHead className="text-white w-[50%]">Wallet</TableHead>
-                </TableRow>
-              </TableHeader>
               <TableBody>
                 {submissions?.map((submission) => (
                   <div key={submission.id} className="mb-6">
@@ -131,7 +124,6 @@ const Admin = () => {
                     </TableRow>
                     <TableRow>
                       <TableCell colSpan={3} className="text-white flex items-center gap-2 bg-white/5">
-                        <span className="font-semibold mr-2">Submission:</span>
                         <span className="flex-grow">{submission.submission_text}</span>
                         <Button
                           variant="ghost"
