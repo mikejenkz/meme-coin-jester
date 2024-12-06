@@ -63,19 +63,25 @@ const Admin = () => {
   const handleDelete = async (id: string) => {
     console.log("Deleting submission with ID:", id);
     try {
-      const { error } = await supabase
+      const { error, data } = await supabase
         .from("trol_submissions")
         .delete()
-        .eq("id", id);
+        .eq("id", id)
+        .select();
 
       if (error) {
         console.error("Error deleting submission:", error);
-        throw error;
+        toast({
+          title: "Error",
+          description: "Failed to delete submission: " + error.message,
+          variant: "destructive",
+        });
+        return;
       }
 
-      console.log("Successfully deleted submission");
+      console.log("Delete response:", data);
       
-      // Invalidate and refetch
+      // Force a refetch of the data
       await queryClient.invalidateQueries({ queryKey: ["trol-submissions"] });
       
       toast({
@@ -83,7 +89,7 @@ const Admin = () => {
         description: "Submission deleted successfully",
       });
     } catch (error) {
-      console.error("Error deleting submission:", error);
+      console.error("Error in delete operation:", error);
       toast({
         title: "Error",
         description: "Failed to delete submission",
