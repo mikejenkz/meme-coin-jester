@@ -40,7 +40,17 @@ const Index = () => {
         .order("created_at", { ascending: false });
 
       if (error) throw error;
-      return data;
+
+      // Filter out duplicates based on content
+      const uniqueSubmissions = data.reduce((acc: any[], current: any) => {
+        const exists = acc.find((item) => item.content === current.content);
+        if (!exists) {
+          acc.push(current);
+        }
+        return acc;
+      }, []);
+
+      return uniqueSubmissions;
     },
   });
 
@@ -123,16 +133,18 @@ const Index = () => {
           </div>
 
           {/* Featured Submissions */}
-          {featuredSubmissions?.map((submission) => (
-            <div 
-              key={submission.id} 
-              className="max-w-2xl mx-auto mb-8 bg-white/20 backdrop-blur-sm rounded-lg p-6 border border-white/10 hover:bg-white/25 transition-colors min-h-[100px] flex items-center"
-            >
-              <p className="text-lg italic text-gray-200 w-full">
-                <span className="text-green-500">@{submission.username}:</span> {submission.content}
-              </p>
-            </div>
-          ))}
+          <div className="w-full max-w-2xl mx-auto">
+            {featuredSubmissions?.map((submission) => (
+              <div 
+                key={submission.id} 
+                className="w-full mb-8 bg-white/20 backdrop-blur-sm rounded-lg p-6 border border-white/10 hover:bg-white/25 transition-colors min-h-[100px] flex items-center"
+              >
+                <p className="text-lg italic text-gray-200 w-full">
+                  <span className="text-green-500">@{submission.username}:</span> {submission.content}
+                </p>
+              </div>
+            ))}
+          </div>
 
           {/* Submission Form */}
           <div className="max-w-md mx-auto w-full">
