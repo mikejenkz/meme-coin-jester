@@ -10,7 +10,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Copy, Trash2 } from "lucide-react";
-import { format } from "date-fns";
 import { useToast } from "@/components/ui/use-toast";
 
 interface TrolSubmission {
@@ -65,7 +64,7 @@ const Admin = () => {
       if (error) throw error;
 
       // Invalidate and refetch
-      await queryClient.invalidateQueries({ queryKey: ["trol-submissions"] });
+      queryClient.invalidateQueries({ queryKey: ["trol-submissions"] });
       
       toast({
         title: "Success",
@@ -131,46 +130,46 @@ const Admin = () => {
             <Table>
               <TableBody>
                 {submissions?.map((submission) => (
-                  <div key={submission.id} className="mb-6">
-                    <TableRow className="border-b border-white/10">
-                      <TableCell className="text-white w-[20%]">
-                        {format(new Date(submission.created_at), "MMM d")}
-                      </TableCell>
-                      <TableCell className="text-white w-[30%]">{submission.username}</TableCell>
-                      <TableCell className="text-white font-mono text-sm w-[50%] flex items-center gap-2">
-                        <span className="truncate">{submission.wallet_address}</span>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-8 w-8 flex-shrink-0"
-                          onClick={() => copyToClipboard(submission.wallet_address)}
-                        >
-                          <Copy className="h-4 w-4 text-white" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-8 w-8 flex-shrink-0 hover:bg-red-500/20"
-                          onClick={() => handleDelete(submission.id)}
-                        >
-                          <Trash2 className="h-4 w-4 text-red-500" />
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell colSpan={3} className="text-white flex items-center gap-2 bg-white/5">
-                        <span className="flex-grow">{submission.submission_text}</span>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-8 w-8 flex-shrink-0"
-                          onClick={() => copyToClipboard(submission.submission_text)}
-                        >
-                          <Copy className="h-4 w-4 text-white" />
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  </div>
+                  <TableRow key={submission.id}>
+                    <TableCell className="text-white">
+                      <div className="flex flex-col space-y-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2">
+                            <span className="font-mono truncate">{submission.wallet_address}</span>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-8 w-8 flex-shrink-0"
+                              onClick={() => copyToClipboard(submission.wallet_address)}
+                            >
+                              <Copy className="h-4 w-4 text-white" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-8 w-8 flex-shrink-0 hover:bg-red-500/20"
+                              onClick={() => handleDelete(submission.id)}
+                            >
+                              <Trash2 className="h-4 w-4 text-red-500" />
+                            </Button>
+                          </div>
+                        </div>
+                        <div className="bg-white/5 p-4 rounded-md">
+                          <div className="flex items-center justify-between">
+                            <span className="flex-grow">{submission.submission_text}</span>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-8 w-8 flex-shrink-0 ml-2"
+                              onClick={() => copyToClipboard(submission.submission_text)}
+                            >
+                              <Copy className="h-4 w-4 text-white" />
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    </TableCell>
+                  </TableRow>
                 ))}
               </TableBody>
             </Table>
