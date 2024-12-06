@@ -20,7 +20,6 @@ interface TrolSubmission {
   username: string;
   wallet_address: string;
   submission_text: string;
-  status: string;
 }
 
 const Admin = () => {
@@ -108,14 +107,13 @@ const Admin = () => {
                 <TableHead className="text-white">Username</TableHead>
                 <TableHead className="text-white">Wallet</TableHead>
                 <TableHead className="text-white">Submission</TableHead>
-                <TableHead className="text-white">Status</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {submissions?.map((submission) => (
                 <TableRow key={submission.id}>
                   <TableCell className="text-white">
-                    {format(new Date(submission.created_at), "MMM d, yyyy HH:mm")}
+                    {format(new Date(submission.created_at), "MMM d")}
                   </TableCell>
                   <TableCell className="text-white">{submission.username}</TableCell>
                   <TableCell className="text-white font-mono text-sm flex items-center gap-2">
@@ -140,7 +138,6 @@ const Admin = () => {
                       <Copy className="h-4 w-4 text-white" />
                     </Button>
                   </TableCell>
-                  <TableCell className="text-white">{submission.status}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
