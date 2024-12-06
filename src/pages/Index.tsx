@@ -131,7 +131,7 @@ const Index = () => {
 
           {/* Featured Submissions */}
           {featuredSubmissions?.map((submission) => (
-            <div key={submission.id} className="max-w-2xl mx-auto mb-8 bg-white/20 backdrop-blur-sm rounded-lg p-4 border border-white/10 hover:bg-white/25 transition-colors">
+            <div key={submission.id} className="max-w-2xl mx-auto mb-8 bg-white/20 backdrop-blur-sm rounded-lg p-6 border border-white/10 hover:bg-white/25 transition-colors">
               <p className="text-lg italic text-gray-200">
                 <span className="text-green-500">@{submission.username}:</span> {submission.content}
               </p>
